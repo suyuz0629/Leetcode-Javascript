@@ -1,13 +1,13 @@
 var missingNumber = function(nums) {
     for (var i in nums) {
-        while (nums[i] !== i && nums[i] < nums.length && nums[nums[i]] !== nums[i]) {
+        while (nums[i] !== i && nums[i] < nums.length) {
+            if (nums[nums[i]] === nums[i]) {
+                break;
+            }
             var t = nums[i];
             nums[i] = nums[t];
             nums[t] = t;
         }
-    }
-    for (var num in nums) {
-        console.log(nums[num]);
     }
     for (var num in nums) {
         if (nums[num] != num) {
@@ -16,4 +16,3 @@ var missingNumber = function(nums) {
     }
     return nums.length;
 };
-console.log(missingNumber([2, 0]));
