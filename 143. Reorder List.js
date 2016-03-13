@@ -1,8 +1,3 @@
-function ListNode(v) {
-    this.val = v;
-    this.next = null;
-}
-
 var reorderList = function(head) {
     if (!head || !head.next) {
         return;
@@ -20,6 +15,7 @@ var reorderList = function(head) {
     var preMiddle = p1;
     var preCurrent = p1.next;
     while (preCurrent.next) {
+        // get 5, set 4 -> 6, set 5 -> 4, set 3-> 5
         var current = preCurrent.next;
         preCurrent.next = current.next;
         current.next = preMiddle.next;
@@ -39,13 +35,3 @@ var reorderList = function(head) {
         p2 = preMiddle.next;
     }
 };
-
-var l1 = new ListNode(1);
-var l2 = new ListNode(2);
-var l3 = new ListNode(3);
-var l4 = new ListNode(4);
-l1.next = l2;
-l2.next = l3;
-// l3.next = l4;
-var result = reorderList(l1);
-console.log(result);
