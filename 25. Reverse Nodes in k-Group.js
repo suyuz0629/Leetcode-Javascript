@@ -1,8 +1,3 @@
-function ListNode(val) {
-    this.val = val;
-    this.next = null;
-}
-
 var reverseKGroup = function(head, k) {
     if (!head) {
         return null;
@@ -20,7 +15,7 @@ var reverseKGroup = function(head, k) {
         if (k === count && cur) {
             var next = cur.next;
             cur.next = null;
-            var re = reverse(pre, next);
+            var re = reverse(pre);
             par.next = re;
             par = pre;
             cur = next;
@@ -33,8 +28,7 @@ var reverseKGroup = function(head, k) {
     return dummy.next;
 };
 
-var reverse = function(head) {
-    var tail = null;
+var reverse = function(head, tail) {
     while (head) {
         var next = head.next;
         head.next = tail;
@@ -43,13 +37,3 @@ var reverse = function(head) {
     }
     return tail;
 };
-
-// var l3 = new ListNode(0);
-var l1 = new ListNode(1);
-var l2 = new ListNode(2);
-var l3 = new ListNode(3);
-l1.next = l2;
-l2.next = l3;
-// l2.next = l1;
-var l = reverseKGroup(l1, 2);
-console.log(l);
