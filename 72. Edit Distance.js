@@ -16,32 +16,23 @@ var minDistance = function(word1, word2) {
     }
     var dp = [];
     var i;
-    for (i = 0; i <= word1.length; i++) {
+    for (i = 0; i < 2; i++) {
         var temp = new Array(word2.length + 1);
         temp.fill(0);
         dp.push(temp);
     }
-    for (i = 1; i < dp.length; i++) {
-        dp[i][0] = i;
-    }
     for (i = 1; i < dp[0].length; i++) {
         dp[0][i] = i;
     }
-    for (i = 1; i < dp.length; i++) {
+    for (i = 1; i <= word1.length; i++) {
+        dp[i%2][0] = i;
         for (var j = 1; j < dp[0].length; j++) {
-
             if (word1.charAt(i - 1) === word2.charAt(j - 1)) {
-                dp[i][j] = dp[i - 1][j - 1];//Math.min(dp[i - 1][j - 1], 1 + Math.min(dp[i - 1][j], dp[i][j - 1]));
+                dp[i % 2][j] = dp[(i - 1) % 2][j - 1];
             } else {
-                dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i][j - 1]));
+                dp[i % 2][j] = 1 + Math.min(dp[(i - 1) % 2][j - 1], Math.min(dp[(i - 1) % 2][j], dp[i % 2][j - 1]));
             }
         }
     }
-
-    for (var r of dp) {
-        console.log(r);
-    }
-    return dp[word1.length][word2.length];
+    return dp[word1.length % 2][word2.length];
 };
-
-minDistance("zoologicoarchaeologist", "zoogeologist");
